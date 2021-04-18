@@ -1,7 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, "demo"),
@@ -21,7 +20,7 @@ module.exports = {
         test: /\.(scss)$/,
         use: [
           {
-            loader: MiniCssExtractPlugin,
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: "css-loader",
@@ -29,8 +28,10 @@ module.exports = {
           {
             loader: "postcss-loader",
             options: {
-              plugins: function () {
-                return [require("autoprefixer")];
+              postcssOptions: {
+                plugins: function () {
+                  return [require("autoprefixer")];
+                },
               },
             },
           },
@@ -46,8 +47,8 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "../fonts",
-              publicPath: "../fonts",
+              outputPath: "../fonts/",
+              publicPath: "../fonts/",
             },
           },
         ],
